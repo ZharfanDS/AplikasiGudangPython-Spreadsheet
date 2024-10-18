@@ -58,6 +58,22 @@ def delete_data(self):
             # Dapatkan data dari entri yang dipilih
             selected_row = all_data[entry_number - 1]  # -1 untuk menyesuaikan dengan indeks list (karena entry_number dimulai dari 1)
             
+            # Cari indeks kolom yang sesuai dengan "No. Purchasing Request", "Kode", dan "Jumlah Masuk"
+            header = self.sheet.get_all_values()[0]
+            no_purchasing_request_index = header.index("No. Purchasing Request")
+            kode_masuk_index = header.index("Kode")
+            jumlah_masuk_index = header.index("Jumlah Masuk")
+
+            # Ambil nilai dari kolom yang diminta
+            no_purchasing_request_value = selected_row[no_purchasing_request_index]
+            kode_masuk_value = selected_row[kode_masuk_index]
+            jumlah_masuk_value = selected_row[jumlah_masuk_index]
+
+            # Print nilai kolom yang dipilih
+            print(f"No. Purchasing Request: {no_purchasing_request_value}")
+            print(f"Kode: {kode_masuk_value}")
+            print(f"Jumlah Masuk: {jumlah_masuk_value}") 
+
             # Hapus baris berdasarkan nomor entri yang ditemukan
             self.sheet.delete_rows(entry_number + 1)  # +1 untuk menghindari header
             messagebox.showinfo("Info", "Data telah dihapus.")
